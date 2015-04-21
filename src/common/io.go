@@ -2,9 +2,6 @@ package file
 
 /**
  * The following package contains basic file writing functions.
- *
- * @author Fahad Zia Syed <fzia@folio3.com>
- * @created 14th Feb 2015
  */
 
 import (

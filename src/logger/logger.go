@@ -7,7 +7,7 @@ import (
 )
 
 var DEBUG_LEVEL = 2
-var LOG_FILE = "./../logs/log_" + GetTime() + ".log"
+var LOG_FILE = os.Args[4] + "log_" + GetTime() + ".log"
 
 /**
  * Logs message in a file
@@ -17,6 +17,7 @@ var LOG_FILE = "./../logs/log_" + GetTime() + ".log"
  * @author Waqar Alamgir <bonjour@waqaralamgir.tk>
  */
 func Log(message string, level int) {
+
 	if level <= DEBUG_LEVEL {
 		f, err := os.OpenFile(LOG_FILE , os.O_CREATE|os.O_RDWR|os.O_APPEND, 0660)
 		if err != nil {
@@ -37,5 +38,6 @@ func Log(message string, level int) {
  */
 func GetTime() string {
 	t := time.Now()
-	return t.Format(time.RFC3339)
+	// return t.Format(time.RFC3339)
+	return t.Format("20060102150405")
 }

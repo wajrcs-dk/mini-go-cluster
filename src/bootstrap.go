@@ -12,6 +12,7 @@ import (
 	logger "./logger"
 	httpbuilder "./httpbuilder"
 	"os"
+	"strconv"
 )
 
 var MAX_CONCURRENT_CONNECTION = 10
@@ -65,6 +66,10 @@ func main() {
  */
 func process() {
 	logger.Log("Enter process" , DEBUG_LEVEL_LONG)
+	
+	INPUT_FILE := os.Args[1] // get command line first parameter
+	OUTPUT_FILE := os.Args[2] // get command line first parameter
+	OUTPUT_FILE_FAILED := os.Args[3] // get command line first parameter
 
 	logger.Log("Creating channels" , DEBUG_LEVEL_LONG)
 	// Create the read channel
@@ -78,14 +83,14 @@ func process() {
 
 	// Start reading the file and write each line to
 	go fileio.ReadFromFile(INPUT_FILE, readChannel)
-	go fileio.WriteToFile(OUTPUT_FILE , writeChannel, nil, false)
+	go fileio.WriteToFile(OUTPUT_FILE, writeChannel, nil, false)
 	go fileio.WriteToFile(OUTPUT_FILE_FAILED, failedChannel, nil, false)
 
 	logger.Log("Staring threads" , DEBUG_LEVEL_SHORT)
 
 	for threads := 0; threads < MAX_CONCURRENT_CONNECTION; threads++ {
 		
-		logger.Log("Thread " + string(threads) , DEBUG_LEVEL_LONG)
+		logger.Log("Thread " + strconv.Itoa(threads) , DEBUG_LEVEL_LONG)
 
 		go func (dataList chan string, thread chan bool, success chan string, failed chan string, threadId int){
 
@@ -93,10 +98,17 @@ func process() {
 				// Make request
 				httpbuilder.Request(data, success, failed)
 			}
-
-			logger.Log("At thread " + string(threadId) , DEBUG_LEVEL_SHORT)
+			
+			logger.Log("At thread " + strconv.Itoa(threadId) , DEBUG_LEVEL_SHORT)
 			thread <- true
 
 		}(readChannel , threadChannel , writeChannel , failedChannel , threads)
+	}
+	
+	logger.Log("Threads started " + strconv.Itoa(MAX_CONCURRENT_CONNECTION) , DEBUG_LEVEL_SHORT)
+
+	// Ensure recommendations for all customer ids have been fetched
+	for count := 0; count < MAX_CONCURRENT_CONNECTION; count++ {
+		<-threadChannel
 	}
 }

@@ -11,7 +11,7 @@ var DEBUG_LEVEL_LONG = 2
 
 func Request(data string, success chan string, failed chan string) {
 
-	arr := strings.Split(data, ",")
+	arr := strings.Split(data, "|")
 	
 	// If 3 items in array
 	if len(arr) == 3 {
@@ -25,11 +25,14 @@ func Request(data string, success chan string, failed chan string) {
 
 		if errb == true {
 			output := url + "|" + method + "|" + params + "|" + string(resp[:])
-			logger.Log("Success url " + url , DEBUG_LEVEL_LONG)
+			logger.Log("Success url " + url + params , DEBUG_LEVEL_LONG)
+			// logger.Log("Output " + output , DEBUG_LEVEL_LONG)
 			success <- output
 		} else {
-			logger.Log("Failed url " + url , DEBUG_LEVEL_LONG)
-			failed <- url
+			logger.Log("Failed url " + url + params, DEBUG_LEVEL_LONG)
+			failed <- data
 		}
+	} else {
+		logger.Log("Invalid input: " + data , DEBUG_LEVEL_LONG)
 	}
 }
