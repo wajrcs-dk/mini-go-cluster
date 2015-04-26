@@ -16,12 +16,12 @@ Currenly it supports only web requets.
 ## Usage
 Execute go cluster by running the command:
 <br/><code>
-go run src/bootstrap.go <input file path> <output file path> <error file path> <log file path>
+go run src/bootstrap.go (input file path) (output file path) (error file path) (log file path)
 </code>
 
 Example:
 <br/><code>
-go run src/bootstrap.go /www/input/input.txt /www/output/output.txt /www/output/output_error.txt
+go run src/bootstrap.go /www/input/input.txt /www/output/output.txt /www/output/output_error.txt /www/logs/
 </code>
 
 
