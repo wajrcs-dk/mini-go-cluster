@@ -1,3 +1,3 @@
-http://www.google.com/|GET|?x=1
-http://www.yahoo.com/|GET|?x=a
-http://www.facebook.com/|GET|?c=0
+URL|http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg
+URL|http://www.yahoo.com|GET|/wajrcs
+URL|http://www.facebook.com|GET|/waqar.alamgir
