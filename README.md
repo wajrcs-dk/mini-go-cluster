@@ -8,9 +8,8 @@ Jobs can be either:
 Currently supports HTTP GET requests only.
 
 
-## You Will Have
+## Output
 An output file containing jobs results.
-Currenly it supports only web requets.
 
 
 ## Usage
@@ -23,6 +22,18 @@ Example:
 <br/><code>
 go run src/bootstrap.go /www/input/input.txt /www/output/output.txt /www/output/output_error.txt /www/logs/
 </code>
+
+Example input file:
+<br/><pre>
+URL|http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg
+URL|http://www.yahoo.com|GET|/wajrcs
+URL|http://www.facebook.com|GET|/waqar.alamgir
+</pre>
+
+Example output file:
+<br/><pre>
+http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg|{"glossary":{"title":"example glossary"}}
+</pre>
 
 
 ## Configuration
