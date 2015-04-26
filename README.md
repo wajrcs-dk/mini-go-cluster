@@ -36,6 +36,9 @@ http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg|{"glossary":{
 </pre>
 
 
+## Screenshot
+![Cli output](https://raw.github.com/waqar-alamgir/mini-go-cluster/master/screenshot/go-mini-cluster.png)
+
 ## Configuration
 You can modify the following config for number of jobs to execute parallel
 <br/><code>
