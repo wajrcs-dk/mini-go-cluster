@@ -5,7 +5,7 @@ Jobs can be either:
 1. HTTP/ API requests
 2. Terminal commands
 
-Currently supports HTTP GET requests only.
+First release was only supporting HTTP, but now commands are also supported. Please look further at usage section.
 
 
 ## Output
@@ -18,6 +18,11 @@ Execute go cluster by running the command:
 go run src/bootstrap.go (input file path) (output file path) (error file path) (log file path)
 </code>
 
+For better performance, use compile.sh to build (on Linux):
+<br/><code>
+bootstrap (input file path) (output file path) (error file path) (log file path)
+</code>
+
 Example:
 <br/><code>
 go run src/bootstrap.go /www/input/input.txt /www/output/output.txt /www/output/output_error.txt /www/logs/
@@ -26,8 +31,9 @@ go run src/bootstrap.go /www/input/input.txt /www/output/output.txt /www/output/
 Example input file:
 <br/><pre>
 URL|http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg
-URL|http://www.yahoo.com|GET|/wajrcs
+CMD|python|PARAMS|notification.py -chunk 1000
 URL|http://www.facebook.com|GET|/waqar.alamgir
+CMD|python|PARAMS|notification.py -chunk 2000
 </pre>
 
 Example output file:
@@ -38,6 +44,7 @@ http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg|{"glossary":{
 
 ## Screenshot
 ![Cli output](https://raw.github.com/waqar-alamgir/mini-go-cluster/master/screenshot/go-mini-cluster.png)
+
 
 ## Configuration
 You can modify the following config for number of jobs to execute parallel

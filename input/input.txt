@@ -1,3 +1,2 @@
-URL|http://www.google.com|GET|?gws_rd=cr,ssl&ei=KhM9VdKAIMvnuQTv3oDwAg
-URL|http://www.yahoo.com|GET|/wajrcs
+CMD|date|PARAM|
 URL|http://www.facebook.com|GET|/waqar.alamgir

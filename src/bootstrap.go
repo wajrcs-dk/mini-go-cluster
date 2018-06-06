@@ -10,12 +10,12 @@ package main
 import (
 	fileio "./common"
 	logger "./logger"
-	httpbuilder "./httpbuilder"
+	executer "./executer"
 	"os"
 	"strconv"
 )
 
-var MAX_CONCURRENT_CONNECTION = 10
+var MAX_CONCURRENT_CONNECTION = 15
 var START_TIME_SCRIPT string
 var END_TIME_SCRIPT string
 var INPUT_FILE string
@@ -95,8 +95,8 @@ func process() {
 		go func (dataList chan string, thread chan bool, success chan string, failed chan string, threadId int){
 
 			for data := range dataList {
-				// Make request
-				httpbuilder.Request(data, success, failed)
+				// Run either the command or make an http request
+				executer.Execute(data, success, failed)
 			}
 			
 			logger.Log("At thread " + strconv.Itoa(threadId) , DEBUG_LEVEL_SHORT)
